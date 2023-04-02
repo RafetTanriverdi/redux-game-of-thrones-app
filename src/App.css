@@ -4,3 +4,11 @@
 
 }
 
+.pages-name{
+  text-decoration: none ;
+  color: white;
+}
+@media (max-width:762px) {
+  .pages-name{color: blue;}
+  
+}

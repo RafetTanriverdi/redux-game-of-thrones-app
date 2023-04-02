@@ -6,6 +6,8 @@ import Masonry from '@mui/lab/Masonry';
 import { Backdrop, CircularProgress, Alert, Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+
+
 function Home() {
   const characters = useSelector(state => state.characters.items);
   const isLoading = useSelector(state => state.characters.isLoading);
@@ -37,9 +39,9 @@ function Home() {
   }
 
 
-  return (
+  return (<>
+   
     <div >
-      <h2>Characters</h2>
       <div style={{ display: "flex", justifyContent: "center", '@media (maxWidth: 600px)': { with: "100%" } }} >
         <Box sx={{ width: 1150, minHeight: 829, }} className="card" >
           <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3} >
@@ -60,16 +62,16 @@ function Home() {
                   />
                   <div className='card-footer' style={{ padding: "10px 10px" }}>
                     <h3 style={{ marginBottom: "5px" }}>{item.fullName} </h3>
-                 
                   </div>
                 </div>
-               
               </NavLink>
             ))}
           </Masonry>
         </Box>
       </div>
     </div>
+  </>
+
   )
 }
 
