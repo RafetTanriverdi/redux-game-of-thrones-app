@@ -2,6 +2,13 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getQuotes } from '../redux/quotesSlice'
 import { Backdrop, CircularProgress, Stack, Alert } from '@mui/material'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Container from '@mui/material/Container';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 function Quotes() {
@@ -9,7 +16,7 @@ function Quotes() {
   const isLoading = useSelector(state => state.quotes.isLoading);
   const error = useSelector(state => state.quotes.error);
   const data = useSelector(state => state.quotes.items);
-  
+
   useEffect(() => {
     dispatch(getQuotes())
   }, [dispatch])
@@ -33,12 +40,39 @@ function Quotes() {
   }
 
 
-  console.log(data);
-  return (
-    <>
 
-      <div>Quotes</div>
-    </>
+  return (
+    <Container maxWidth="lg">
+      <div>
+        {
+          data.map((character, index) => (
+            <Accordion >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index}a-content`}
+                id={`panel${index}a-header`}
+              >
+                <Typography>{character.name}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  {character.quotes.map((quote) => (
+                    <ul>
+                      <li>
+
+                        <ArrowForwardIosIcon style={{fontSize:"14px" , color:"blue",fontWeight:"bold"}}/>{quote}
+                      </li>
+                    </ul>
+                  ))}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+
+          )
+          )
+        }
+      </div>
+    </Container>
   )
 }
 
